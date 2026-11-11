@@ -1,4 +1,4 @@
-function multiplyValue(value: number, multiplier: number = 2) {
+function multiplyValue(value: number, multiplier: number = 2): number {
   return value * multiplier;
 }
 
@@ -32,26 +32,14 @@ interface Course {
 
 function getPopularCourses(courses: Course[], minStudents: number): Course[] {
   return courses.filter(
-    (course) => course.isPublished === true && course.students >= minStudents,
+    (course: Course): boolean =>
+      course.isPublished === true && course.students >= minStudents,
   );
 }
 
-const courses: Course[] = [
-  { title: "TypeScript Mastery", students: 120, isPublished: true },
-  { title: "Draft Course", students: 200, isPublished: false },
-  { title: "Basic HTML", students: 45, isPublished: true },
-  { title: "Next.js Pro", students: 85, isPublished: true },
-];
-
 function pluckValues<T, K extends keyof T>(items: T[], key: K): T[K][] {
-  return items.map((item) => item[key]);
+  return items.map((item: T): T[K] => item[key]);
 }
-
-const users = [
-  { id: 1, name: "Rakib", role: "Admin" },
-  { id: 2, name: "Sadia", role: "Editor" },
-  { id: 3, name: "Tariq", role: "Subscriber" },
-];
 
 class Employee {
   protected name: string;
@@ -80,12 +68,10 @@ class Manager extends Employee {
   }
 }
 
-const manager = new Manager("Alice", 50000, "Engineering");
-
 function validateAgeAsync(age: number): Promise<string> {
-  return new Promise((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     if (age >= 18) {
-      setTimeout(() => {
+      setTimeout((): void => {
         resolve("Access Granted");
       }, 1000);
     } else {
@@ -93,6 +79,3 @@ function validateAgeAsync(age: number): Promise<string> {
     }
   });
 }
-
-validateAgeAsync(20);
-validateAgeAsync(15);
